@@ -13,4 +13,21 @@ public class GameStateManager {
         currentState = MENUSTATE;
         gameStates.add(new MenuState(this));
     }
+
+    public void setState(int state){
+        currentState = state;
+        gameStates.get(currentState).init();
+    }
+
+    public void draw(java.awt.Graphics2D g){
+        gameStates.get(currentState).draw(g);
+    }
+
+    public void keyPressed(int k){
+        gameStates.get(currentState).keyPressed(k);
+    }
+
+    public void keyReleased(int k){
+        gameStates.get(currentState).keyReleased(k);
+    }
 }
