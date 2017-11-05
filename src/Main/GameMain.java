@@ -3,6 +3,7 @@ package Main;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 public class GameMain extends JPanel {
     //constants for the game
@@ -18,7 +19,7 @@ public class GameMain extends JPanel {
     //menu bar
     // public static JMenuBar menuBar;
 
-    public GameMain(){
+    public GameMain() {
         //initialize game objects
         gameInit();
 
@@ -28,34 +29,33 @@ public class GameMain extends JPanel {
         add(canvas);
         //scorecard, button, etc
         //setup menu bar
-        
+
     }
 
     private void gameInit() {
 
     }
 
-    private void gameStart(){
+    private void gameStart() {
 
     }
 
-    private void gameStop(){
+    private void gameStop() {
 
     }
 
-    private void gameUpdate(){
+    private void gameUpdate() {
 
     }
 
     //can also use Graphics g
-    public void GameDraw(Graphics2D g2d){
+    public void gameDraw(Graphics2D g2d) {
 
     }
 
     //process keypressed events
-
-    public void gameKeyPressed(int keyCode){
-        switch (keyCode){
+    public void gameKeyPressed(int keyCode) {
+        switch (keyCode) {
             case KeyEvent.VK_UP:
                 break;
             case KeyEvent.VK_DOWN:
@@ -65,6 +65,67 @@ public class GameMain extends JPanel {
             case KeyEvent.VK_LEFT:
                 break;
         }
+
+    }
+
+    public class GameCanvas extends JPanel implements KeyListener {
+
+        public GameCanvas() {
+            setFocusable(true);
+            requestFocus();
+            addKeyListener(this);
+        }
+
+        //how graphics works??
+        public void paintComponent(Graphics g) {
+            Graphics2D g2d = (Graphics2D) g;
+            super.paintComponent(g2d);
+            setBackground(Color.BLACK);
+
+            //draw ??
+            gameDraw(g2d);
+        }
+
+
+        @Override
+        public void keyTyped(KeyEvent e) {
+            gameKeyPressed(e.getKeyCode());
+        }
+
+        @Override
+        public void keyPressed(KeyEvent e) {
+
+        }
+
+        @Override
+        public void keyReleased(KeyEvent e) {
+
+        }
+
+
+    }
+
+    public static void main(String[] args) {
+        //UI thread safety
+        //let all other events be processed
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                //construct a new frame
+                JFrame frame = new JFrame(TITLE);
+                frame.setContentPane(new GameMain());
+//                frame.setJMenuBar(menuBar);
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+                //responsive
+                frame.pack();
+
+                //center
+                frame.setLocationRelativeTo(null);
+                frame.setVisible(true);
+
+            }
+        });
 
     }
 
