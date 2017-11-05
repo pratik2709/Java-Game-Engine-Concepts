@@ -17,10 +17,13 @@ public class Background {
     private double dy;
     private int moveScale;
 
+
+
     public Background(String s, int ms) {
         try {
             image = ImageIO.read(getClass().getResourceAsStream(s));
             moveScale = ms;
+
 
         } catch (IOException ex) {
             ex.printStackTrace();

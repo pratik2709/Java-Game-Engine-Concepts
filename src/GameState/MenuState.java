@@ -1,11 +1,37 @@
 package GameState;
 
+import TileMap.Background;
+
 import java.awt.*;
 
 public class MenuState extends GameState {
 
-    public MenuState(GameStateManager gsm){
+    private Background bg;
+
+    private String[] choice = {
+            "Start",
+            "Help",
+            "Quit",
+    };
+
+    private int currentChoice = 0;
+    private Font titleFont;
+    private Color titleColor;
+    private Font font;
+
+    public MenuState(GameStateManager gsm) {
         this.gsm = gsm;
+        try {
+            bg = new Background("/background/menu.gif", 1);
+            bg.setVector(-0.1, 0);
+
+            titleColor = new Color(128, 0, 0);
+            titleFont = new Font("Century Gothic", Font.PLAIN,28);
+            font = new Font("Arial", Font.PLAIN,12);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
     @Override
@@ -14,8 +40,25 @@ public class MenuState extends GameState {
     }
 
     @Override
-    public void update() {
+    public void update(Graphics2D g) {
+        bg.update();
 
+        //draw title
+        g.setColor(titleColor);
+        g.setFont(titleFont);
+        g.drawString("Dragon tale", 80, 70);
+
+        //draw menu options
+        g.setFont(font);
+        for(int i = 0; i < choice.length; i++){
+            if(i == currentChoice){
+                g.setColor(Color.BLACK);
+            }
+            else{
+                g.setColor(Color.RED);
+            }
+            g.drawString(choice[i], 145, 140 + i*15 );
+        }
     }
 
     @Override
