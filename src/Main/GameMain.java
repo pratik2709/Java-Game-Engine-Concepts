@@ -16,6 +16,16 @@ public class GameMain extends JPanel {
     //custom drawing panel
     private GameCanvas canvas;
 
+    static final int UPDATES_PER_SECOND = 4;
+
+    //nano seconds
+    static final long UPDATE_PERIOD_NANO_SECONDS = 100000000L/ UPDATES_PER_SECOND;
+
+
+    //game state
+    boolean gameOver = false;
+    boolean gamePaused = false;
+
     //menu bar
     // public static JMenuBar menuBar;
 
@@ -36,17 +46,19 @@ public class GameMain extends JPanel {
 
     }
 
-    static final int UPDATES_PER_SECOND = 4;
-
-    //nano seconds
-    static final long UPDATE_PERIOD_NANO_SECONDS = 100000000L/ UPDATES_PER_SECOND;
-
-
-    //game state
-    boolean gameOver = false;
-    boolean gamePaused = false;
 
     private void gameStart() {
+
+        Thread gameThread = new Thread(){
+            @Override
+            public void run(){
+                gameLoop();
+            }
+        };
+        gameThread.start();
+    }
+
+    public void gameLoop() {
         long beginTime, timeTaken, timeLeft;
 
         while (!gameOver) {
@@ -77,7 +89,6 @@ public class GameMain extends JPanel {
                 ex.printStackTrace();
             }
         }
-
     }
 
     private void gameStop() {
