@@ -56,7 +56,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
         while (running){
             start = System.nanoTime();
 
-            update();
+//            update();
             draw();
             drawToScreen();
 
@@ -77,14 +77,14 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
     private void drawToScreen() {
         // draw on a component ?
         Graphics g2 = getGraphics();
-        g2.drawImage(image, 0, 0, null);
+        g2.drawImage(image, 0, 0, WIDTH*SCALE, HEIGHT* SCALE, null);
         //dispose graphics context
         g2.dispose();
     }
 
-    private void update() {
-        gsm.update(g);
-    }
+//    private void update() {
+//        gsm.update(g);
+//    }
 
     private void draw() {
         gsm.draw(g);
@@ -93,7 +93,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
     public void init(){
         image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
         // ??
-        g = (Graphics2D) g;
+        g = (Graphics2D) image.getGraphics();
         running = true;
     }
 

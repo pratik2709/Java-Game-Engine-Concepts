@@ -47,6 +47,7 @@ public class Background {
     }
 
     public void draw(Graphics2D g) {
+        g.drawImage(image, x, y, null);
         if (x < 0) {
             g.drawImage(
                     image,
