@@ -23,7 +23,7 @@ public class MenuState extends GameState {
     public MenuState(GameStateManager gsm) {
         this.gsm = gsm;
         try {
-            bg = new Background("/background/menu.gif", 1);
+            bg = new Background("/Backgrounds/menubg.gif", 1);
             bg.setVector(-0.1, 0);
 
             titleColor = new Color(128, 0, 0);
@@ -41,8 +41,8 @@ public class MenuState extends GameState {
     }
 
     @Override
-    public void update(Graphics2D g) {
-        bg.update();
+    public void draw(Graphics2D g) {
+        bg.draw(g);
 
         //draw title
         g.setColor(titleColor);
@@ -63,7 +63,7 @@ public class MenuState extends GameState {
     }
 
     @Override
-    public void draw(Graphics2D g) {
+    public void update(Graphics2D g) {
 
     }
 

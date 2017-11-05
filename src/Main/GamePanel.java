@@ -33,6 +33,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
         setPreferredSize(new Dimension(WIDTH*SCALE, HEIGHT*SCALE));
         setFocusable(true);
         requestFocus();
+        gsm = new GameStateManager();
     }
 
     //what does this do ??
@@ -53,7 +54,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
         long wait;
 
         //game loop
-        while (running){
+        while (true){
             start = System.nanoTime();
 
 //            update();
