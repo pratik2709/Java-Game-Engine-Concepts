@@ -36,7 +36,29 @@ public class GameMain extends JPanel {
 
     }
 
+    static final int UPDATES_PER_SECOND = 4;
+
+    //nano seconds
+    static final long UPDATE_PERIOD_NANO_SECONDS = 100000000L/ UPDATES_PER_SECOND;
+
+
+    //game state
+    boolean gameOver = false;
+    boolean gamePaused = false;
+
     private void gameStart() {
+        while (!gameOver) {
+
+            if (!gamePaused) {
+                //update object positions
+                gameUpdate();
+            }
+
+            //refresh display
+            repaint();
+
+            //delay timer
+        }
 
     }
 
