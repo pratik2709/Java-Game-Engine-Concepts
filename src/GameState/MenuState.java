@@ -3,6 +3,7 @@ package GameState;
 import TileMap.Background;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 
 public class MenuState extends GameState {
 
@@ -73,6 +74,34 @@ public class MenuState extends GameState {
 
     @Override
     public void keyPressed(int k) {
+        if(k == KeyEvent.VK_DOWN){
+            currentChoice++;
+            if(currentChoice == choice.length){
+                currentChoice = choice.length - 1;
+            }
+        }
 
+        if(k == KeyEvent.VK_UP){
+            currentChoice--;
+            if(currentChoice == -1){
+                currentChoice = 0;
+            }
+        }
+
+        if(k == KeyEvent.VK_ENTER){
+            select();
+        }
+    }
+
+    private void select() {
+        if(currentChoice == 0){
+            //start
+        }
+        else if (currentChoice == 1){
+            //help
+        }
+        else if(currentChoice == 2){
+            //exit
+        }
     }
 }
