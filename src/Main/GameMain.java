@@ -47,7 +47,10 @@ public class GameMain extends JPanel {
     boolean gamePaused = false;
 
     private void gameStart() {
+        long beginTime, timeTaken, timeLeft;
+
         while (!gameOver) {
+            beginTime = System.nanoTime();
 
             if (!gamePaused) {
                 //update object positions
@@ -58,6 +61,21 @@ public class GameMain extends JPanel {
             repaint();
 
             //delay timer
+            timeTaken = System.nanoTime() - beginTime;
+            //miliseconds
+            timeLeft = (UPDATE_PERIOD_NANO_SECONDS - timeTaken)/ 1000000;
+
+            if(timeLeft < 10){
+                timeLeft = 10;
+            }
+
+            try{
+                //adds a delay and another thread can work in that time
+                Thread.sleep(timeLeft);
+            }
+            catch (InterruptedException ex){
+                ex.printStackTrace();
+            }
         }
 
     }
