@@ -26,6 +26,11 @@ public class GameMain extends JPanel {
     boolean gameOver = false;
     boolean gamePaused = false;
 
+    static enum GameState {
+        INITIALIZED, PLAYING, PAUSED, GAMEOVER, DESTROYED;
+    }
+    static GameState state;
+
     //menu bar
     // public static JMenuBar menuBar;
 
@@ -43,7 +48,7 @@ public class GameMain extends JPanel {
     }
 
     private void gameInit() {
-
+        state = GameState.INITIALIZED;
     }
 
 
@@ -59,12 +64,14 @@ public class GameMain extends JPanel {
     }
 
     public void gameLoop() {
+        state = GameState.PLAYING;
+
         long beginTime, timeTaken, timeLeft;
 
-        while (!gameOver) {
+        while (state != GameState.GAMEOVER) {
             beginTime = System.nanoTime();
 
-            if (!gamePaused) {
+            if (state == GameState.PLAYING) {
                 //update object positions
                 gameUpdate();
             }
@@ -101,6 +108,16 @@ public class GameMain extends JPanel {
 
     //can also use Graphics g
     public void gameDraw(Graphics2D g2d) {
+        switch (state){
+            case INITIALIZED:
+                break;
+            case PLAYING:
+                break;
+            case PAUSED:
+                break;
+            case GAMEOVER:
+                break;
+        }
 
     }
 
