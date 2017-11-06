@@ -42,9 +42,11 @@ public class Background {
     }
 
     public void update() {
-        System.out.println(x);
-        x += dx;
-        y += dy;
+        x += this.dx;
+        y += this.dy;
+        System.out.println(this.x);
+        System.out.println(this.dx);
+        System.out.println(this.dx + this.x);
     }
 
     public void draw(Graphics2D g) {
@@ -52,15 +54,15 @@ public class Background {
         if (x < 0) {
             g.drawImage(
                     image,
-                    x + GamePanel.WIDTH,
-                    y,
+                    (int)x + GamePanel.WIDTH,
+                    (int)y,
                     null
             );
         } else if (x > 0) {
             g.drawImage(
                     image,
-                    x - GamePanel.WIDTH,
-                    y,
+                    (int)x - GamePanel.WIDTH,
+                    (int)y,
                     null
             );
         }
