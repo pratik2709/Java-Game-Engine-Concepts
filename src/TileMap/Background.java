@@ -42,6 +42,7 @@ public class Background {
     }
 
     public void update() {
+        System.out.println(x);
         x += dx;
         y += dy;
     }

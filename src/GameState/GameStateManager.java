@@ -22,10 +22,10 @@ public class GameStateManager {
     public void draw(java.awt.Graphics2D g){
         gameStates.get(currentState).draw(g);
     }
-//
-//    public void update(java.awt.Graphics2D g){
-//        gameStates.get(currentState).update(g);
-//    }
+
+    public void update(){
+        gameStates.get(currentState).update();
+    }
 
     public void keyPressed(int k){
         gameStates.get(currentState).keyPressed(k);
