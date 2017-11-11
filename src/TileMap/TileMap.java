@@ -50,34 +50,34 @@ public class TileMap {
 
     public void loadTiles(String s) {
         try {
-            t = ImageIO.read(getClass().getResourceAsStream(s));
+            tileset = ImageIO.read(getClass().getResourceAsStream(s));
+            numOfTilesAcross = tileset.getWidth() / tileSize;
+            tiles = new Tile[2][numOfTilesAcross];
+
+            BufferedImage subImage;
+            for (int col = 0; col < numOfTilesAcross; col++) {
+                subImage = tileset.getSubimage(
+                        col * tileSize,
+                        0,
+                        tileSize,
+                        tileSize
+                );
+                //1st row of the matrix
+                tiles[0][col] = new Tile(subImage, Tile.NORMAL);
+                subImage = tileset.getSubimage(
+                        col * tileSize,
+                        tileSize,
+                        tileSize,
+                        tileSize);
+
+                //2nd row of matrix
+                tiles[1][col] = new Tile(subImage, Tile.BLOCKED);
+            }
+
+
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-
-        numOfTilesAcross = tileset.getWidth() / tileSize;
-        tiles = Tile[2][numOfTilesAcross];
-
-        BufferedImage subImage;
-        for (int col = 0; col < numOfTilesAcross; col++){
-            subImage = tileset.getSubimage(
-                    col* tileSize,
-                    0,
-                    tileSize,
-                    tileSize
-            );
-            //1st row of the matrix
-            tiles[0][col] = new Tile(subImage, Tile.NORMAL);
-            subImage = tileset.getSubimage(
-                    col* tileSize,
-                    tileSize,
-                    tileSize,
-                    tileSize);
-
-            //2nd row of matrix
-            tiles[1][col] = new Tile(subImage, Tile.BLOCKED);
-        }
-
 
 
     }
@@ -91,16 +91,16 @@ public class TileMap {
             numCols = Integer.parseInt(br.readLine());
             numRows = Integer.parseInt(br.readLine());
             map = new int[numRows][numCols];
-            width = numCols*tileSize;
-            height = numCols*tileSize;
+            width = numCols * tileSize;
+            height = numCols * tileSize;
 
             //remove whitespace
             //??
             String delimiters = "//s+";
-            for(int row = 0; row < numRows; row++){
+            for (int row = 0; row < numRows; row++) {
                 String line = br.readLine();
                 String[] tokens = line.split(delimiters);
-                for(int cols = 0; cols < numCols; cols++){
+                for (int cols = 0; cols < numCols; cols++) {
                     map[row][cols] = Integer.parseInt(tokens[cols]);
                 }
             }
