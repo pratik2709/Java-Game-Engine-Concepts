@@ -5,7 +5,10 @@ import Main.GamePanel;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.Buffer;
 
 public class TileMap {
@@ -81,8 +84,29 @@ public class TileMap {
 
     public void loadMap(String s) {
         try {
-            ImageIO.read(getClass().getResourceAsStream(s));
-        } catch (IOException ex) {
+            InputStream in = getClass().getResourceAsStream(s);
+            BufferedReader br = new BufferedReader(
+                    new InputStreamReader(in)
+            );
+            numCols = Integer.parseInt(br.readLine());
+            numRows = Integer.parseInt(br.readLine());
+            map = new int[numRows][numCols];
+            width = numCols*tileSize;
+            height = numCols*tileSize;
+
+            //remove whitespace
+            //??
+            String delimiters = "//s+";
+            for(int row = 0; row < numRows; row++){
+                String line = br.readLine();
+                String[] tokens = line.split(delimiters);
+                for(int cols = 0; cols < numCols; cols++){
+                    map[row][cols] = Integer.parseInt(tokens[cols]);
+                }
+            }
+
+
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
