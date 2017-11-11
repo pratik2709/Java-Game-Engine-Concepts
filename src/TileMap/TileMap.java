@@ -47,10 +47,35 @@ public class TileMap {
 
     public void loadTiles(String s) {
         try {
-            ImageIO.read(getClass().getResourceAsStream(s));
+            t = ImageIO.read(getClass().getResourceAsStream(s));
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+
+        numOfTilesAcross = tileset.getWidth() / tileSize;
+        tiles = Tile[2][numOfTilesAcross];
+
+        BufferedImage subImage;
+        for (int col = 0; col < numOfTilesAcross; col++){
+            subImage = tileset.getSubimage(
+                    col* tileSize,
+                    0,
+                    tileSize,
+                    tileSize
+            );
+            //1st row of the matrix
+            tiles[0][col] = new Tile(subImage, Tile.NORMAL);
+            subImage = tileset.getSubimage(
+                    col* tileSize,
+                    tileSize,
+                    tileSize,
+                    tileSize);
+
+            //2nd row of matrix
+            tiles[1][col] = new Tile(subImage, Tile.BLOCKED);
+        }
+
+
 
     }
 
