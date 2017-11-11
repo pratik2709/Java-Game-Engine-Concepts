@@ -1,6 +1,5 @@
 package TileMap;
 
-import Main.Game;
 import Main.GamePanel;
 
 import javax.imageio.ImageIO;
@@ -9,7 +8,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.nio.Buffer;
 
 public class TileMap {
     private int x;
@@ -52,6 +50,7 @@ public class TileMap {
         try {
             tileset = ImageIO.read(getClass().getResourceAsStream(s));
             numOfTilesAcross = tileset.getWidth() / tileSize;
+            //2d array with 2 rows and n number of cols
             tiles = new Tile[2][numOfTilesAcross];
 
             BufferedImage subImage;
