@@ -34,8 +34,8 @@ public class TileMap {
 
 
     //drawing
-    private int numRowOffset;
-    private int numColOffset;
+    private int rowOffset;
+    private int colOffset;
     private int numOfRowsToDraw;
     private int numOfColsToDraw;
 
@@ -46,6 +46,7 @@ public class TileMap {
         double tween = 0.07;
     }
 
+    //each tile is an image which is being loaded in a 2D array
     public void loadTiles(String s) {
         try {
             tileset = ImageIO.read(getClass().getResourceAsStream(s));
@@ -108,6 +109,52 @@ public class TileMap {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
+
+    public int getTileSize(){
+        return tileSize;
+    }
+
+    public int getx(){
+        return (int)x;
+    }
+
+    public int gety(){
+        return (int)y;
+    }
+
+    public int getWidth(){
+        return width;
+    }
+
+    public int getHeight(){
+        return height;
+    }
+
+    //???
+    public int getType(int row, int col){
+        int rc = map[row][col];
+        int r = rc/ numOfTilesAcross;
+        int c = rc% numOfTilesAcross;
+        return tiles[r][c].getType();
+    }
+
+    public void setPosition(double x, double y){
+        this.x += x;
+        this.y += y;
+
+        fixbounds();
+
+        //??
+        colOffset = (int)-this.x/tileSize;
+        rowOffset = (int)-this.y/tileSize;
+    }
+
+    private void fixbounds() {
+        if(x < xmin) x = xmin;
+        if(x > xmax) x = xmax;
+        if(y < ymin) y = ymin;
+        if(y > ymax) y = ymax;
     }
 
 
