@@ -3,6 +3,7 @@ package TileMap;
 import Main.GamePanel;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -155,6 +156,28 @@ public class TileMap {
         if(x > xmax) x = xmax;
         if(y < ymin) y = ymin;
         if(y > ymax) y = ymax;
+    }
+
+    public void draw(Graphics2D g){
+        //?
+        for(int row = rowOffset; row < rowOffset + numOfRowsToDraw; row++){
+            for(int col = colOffset; col < colOffset + numOfColsToDraw; col++){
+
+                if(col >= numCols) break;
+
+                if(map[row][col] == 0) continue;
+
+                int rc = map[row][col];
+                int r = rc/ numOfTilesAcross;
+                int c = rc% numOfTilesAcross;
+
+                g.drawImage(tiles[r][c].getImage(),
+                        (int)x + col*tileSize,
+                        (int)y + row* tileSize,
+                        null);
+
+            }
+        }
     }
 
 
