@@ -89,10 +89,8 @@ public class TileMap {
             BufferedReader br = new BufferedReader(
                     new InputStreamReader(in)
             );
-            System.out.println("check before");
             numCols = Integer.parseInt(br.readLine());
             numRows = Integer.parseInt(br.readLine());
-            System.out.println("check after");
             map = new int[numRows][numCols];
             width = numCols * tileSize;
             height = numCols * tileSize;
