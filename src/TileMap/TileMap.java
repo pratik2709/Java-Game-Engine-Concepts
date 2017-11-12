@@ -9,6 +9,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 
 public class TileMap {
     private int x;
@@ -93,7 +94,7 @@ public class TileMap {
             numRows = Integer.parseInt(br.readLine());
             map = new int[numRows][numCols];
             width = numCols * tileSize;
-            height = numCols * tileSize;
+            height = numRows * tileSize;
 
             //remove whitespace
             //??
@@ -105,6 +106,7 @@ public class TileMap {
                     map[row][cols] = Integer.parseInt(tokens[cols]);
                 }
             }
+//            System.out.println(Arrays.deepToString(map));
 
 
         } catch (Exception ex) {
@@ -147,10 +149,13 @@ public class TileMap {
         fixbounds();
 
         //??
+        //which part of the screen to draw
+        //what part of your world is visible
         colOffset = (int)-this.x/tileSize;
         rowOffset = (int)-this.y/tileSize;
     }
 
+    //xmin and others not initialized
     private void fixbounds() {
         if(x < xmin) x = xmin;
         if(x > xmax) x = xmax;
@@ -167,6 +172,7 @@ public class TileMap {
 
                 if(map[row][col] == 0) continue;
 
+                //??
                 int rc = map[row][col];
                 int r = rc/ numOfTilesAcross;
                 int c = rc% numOfTilesAcross;
