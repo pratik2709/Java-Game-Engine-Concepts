@@ -1,6 +1,8 @@
 package Entity;
 
+import Main.GamePanel;
 import TileMap.TileMap;
+import TileMap.Tile;
 
 import java.awt.*;
 
@@ -183,6 +185,7 @@ public abstract class MapObject {
                 falling = true;
             }
         }
+    }
 
         public int getx() { return (int) x;}
         public int gety() { return (int) y;}
@@ -222,6 +225,5 @@ public abstract class MapObject {
             return x + xmap + width < 0 || x + xmap - width > GamePanel.WIDTH ||
                     y + ymap + height < 0 || y + ymap - height > GamePanel.HEIGHT;
         }
-    }
 
 }
