@@ -119,6 +119,32 @@ public class Player extends MapObject{
     }
 
     public void update(){
-        
+        //??
+        getNextPosition();
+        checkTileMapCollision();
+        setPosition(xtemp, ytemp);
+
+        //set animation
+        if(scratching){
+            if(currentAction != SCRATCHING){
+                currentAction = SCRATCHING;
+                animation.setFrame(sprites.get(SCRATCHING));
+                //??
+                animation.setDelay(50);
+                //width of the sprite
+                width = 60;
+            }
+        }
+        else if (firing){
+            if(currentAction != FIREBALL){
+                currentAction = FIREBALL;
+                animation.setFrame(sprites.get(FIREBALL));
+                animation.setDelay(100);
+                width = 30;
+            }
+        }
+        else if(dy > 0){
+
+        }
     }
 }
