@@ -1,5 +1,8 @@
 package Entity;
 import TileMap.TileMap;
+
+import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
@@ -32,7 +35,56 @@ public class Player extends MapObject{
         //real
         cwidth = 20;
         cheight = 20;
+        moveSpeed = 0.3;
+        maxSpeed = 1.6;
+        stopSpeed = 0.4;
+        fallSpeed = 0.15;
+        maxFallSpeed = 4.0;
+        jumpStart = -4.8;
+        stopJumpSpeed = 0.3;
 
+        facingRight = true;
+        health = maxHealth = 5;
+        fire = maxFire = 2500;
+        fireCost = 200;
+        fireBallDamage = 5;
+        //fireBalls = new ArrayList<FireBall>();
+
+        scratchDamage = 8;
+        scratchRange = 40;
+
+        //load sprites
+        try{
+            BufferedImage spriteSheet = ImageIO.read(
+                    getClass().getResourceAsStream(
+                            "/Sprites/Player/playersprites.gif"
+                    )
+            );
+            for(int i = 0; i < 7; i++){
+                BufferedImage[] bi = new BufferedImage[numFrames[i]];
+                for(int j = 0; j < numFrames[i]; j++){
+                    if(i != 6){
+                        bi[j] = spriteSheet.getSubimage(
+                                j*width,
+                                i*height,
+                                width,
+                                height
+                        );
+                    }
+                    else{
+                        bi[j] = spriteSheet.getSubimage(
+                                j*width*2,
+                                i*height,
+                                width,
+                                height
+                        );
+                    }
+
+                }
+            }
+        } catch (Exception ex){
+            ex.printStackTrace();
+        }
 
     }
 }
