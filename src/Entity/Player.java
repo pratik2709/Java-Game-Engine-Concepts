@@ -81,10 +81,44 @@ public class Player extends MapObject{
                     }
 
                 }
+                sprites.add(bi);
             }
+
         } catch (Exception ex){
             ex.printStackTrace();
         }
 
+    }
+
+    public int getHealth(){
+        return health;
+    }
+
+    public int getMaxHealth(){
+        return maxHealth;
+    }
+
+    public int getFire(){
+        return fire;
+    }
+
+    public int getMaxFire(){
+        return maxFire;
+    }
+
+    public void setFiring(){
+        firing = true;
+    }
+
+    public void setScratching(){
+        scratching = true;
+    }
+
+    public void setGliding(boolean b){
+        gliding = b;
+    }
+
+    public void update(){
+        
     }
 }
