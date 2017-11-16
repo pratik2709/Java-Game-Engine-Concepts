@@ -19,9 +19,19 @@ public class Player extends MapObject {
     private int maxFire;
     private boolean dead;
     private boolean flinching;
-    private boolean flinchTimer;
+    private long flinchTimer;
 
-    
+    //fireball
+    private boolean firing;
+    private int fireCost;
+    private int fireBallDamage;
+    //private ArrayList<FireBall> fireballs;
+
+    //scratch
+    private boolean scratching;
+    private int scratchRange;
+    private int ScratchDamage;
+
 
     //animtaions
     private ArrayList<BufferedImage[]> sprites;
@@ -241,5 +251,40 @@ public class Player extends MapObject {
                     height,
                     null);
         }
+    }
+
+    private void getNextPosition() {
+        //movement
+        //dont go beyond maximum speed
+        //dx is the delta distance ?? -- sounds reasonable
+        if(left){
+            dx -= moveSpeed;
+            if(dx < -maxSpeed){
+                dx = -maxSpeed;
+            }
+        }
+        else if(right) {
+            dx += moveSpeed;
+            if(dx > maxSpeed){
+                dx = maxSpeed;
+            }
+        }
+        else{
+            //?? -- if not left or right
+            // left and right above have some meaning?
+            if(dx > 0){
+                dx -= stopSpeed;
+                if(dx < 0){
+                    dx = 0;
+                }
+            }
+            else if(dx < 0){
+                dx += stopSpeed;
+                if(dx > 0){
+                    dx = 0;
+                }
+            }
+        }
+        return nextPosition;
     }
 }
