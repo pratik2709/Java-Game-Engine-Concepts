@@ -83,6 +83,7 @@ public class Player extends MapObject {
                             "/Sprites/Player/playersprites.gif"
                     )
             );
+            sprites = new ArrayList<BufferedImage[]>();
             for (int i = 0; i < 7; i++) {
                 //create a new buffered image array for each loop iteration
                 BufferedImage[] bi = new BufferedImage[numFrames[i]];
@@ -110,6 +111,11 @@ public class Player extends MapObject {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+
+        animation = new Animation();
+        currentAction = IDLE;
+        animation.setFrames(sprites.get(IDLE));
+        animation.setDelay(400);
 
     }
 
