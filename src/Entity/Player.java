@@ -30,7 +30,7 @@ public class Player extends MapObject {
     //scratch
     private boolean scratching;
     private int scratchRange;
-    private int ScratchDamage;
+    private int scratchDamage;
 
 
     //animtaions
@@ -84,6 +84,7 @@ public class Player extends MapObject {
                     )
             );
             for (int i = 0; i < 7; i++) {
+                //create a new buffered image array for each loop iteration
                 BufferedImage[] bi = new BufferedImage[numFrames[i]];
                 for (int j = 0; j < numFrames[i]; j++) {
                     if (i != 6) {
@@ -150,7 +151,7 @@ public class Player extends MapObject {
         if (scratching) {
             if (currentAction != SCRATCHING) {
                 currentAction = SCRATCHING;
-                animation.setFrame(sprites.get(SCRATCHING));
+                animation.setFrames(sprites.get(SCRATCHING));
                 //??
                 animation.setDelay(50);
                 //width of the sprite
@@ -159,7 +160,7 @@ public class Player extends MapObject {
         } else if (firing) {
             if (currentAction != FIREBALL) {
                 currentAction = FIREBALL;
-                animation.setFrame(sprites.get(FIREBALL));
+                animation.setFrames(sprites.get(FIREBALL));
                 animation.setDelay(100);
                 width = 30;
             }
@@ -169,14 +170,14 @@ public class Player extends MapObject {
         else if (dy > 0) {
             if (currentAction != GLIDING) {
                 currentAction = GLIDING;
-                animation.setFrame(sprites.get(GLIDING));
+                animation.setFrames(sprites.get(GLIDING));
                 //??
                 animation.setDelay(100);
                 //width of the sprite
                 width = 30;
             } else if (currentAction != FALLING) {
                 currentAction = FALLING;
-                animation.setFrame(sprites.get(FALLING));
+                animation.setFrames(sprites.get(FALLING));
                 animation.setDelay(100);
                 width = 30;
             }
@@ -187,7 +188,7 @@ public class Player extends MapObject {
         else if (dy < 0) {
             if (currentAction != JUMPING) {
                 currentAction = JUMPING;
-                animation.setFrame(sprites.get(JUMPING));
+                animation.setFrames(sprites.get(JUMPING));
                 //since only 1 sprite??
                 animation.setDelay(-1);
                 width = 30;
@@ -197,7 +198,7 @@ public class Player extends MapObject {
         else if (left || right) {
             if (currentAction != WALKING) {
                 currentAction = WALKING;
-                animation.setFrame(sprites.get(WALKING));
+                animation.setFrames(sprites.get(WALKING));
                 animation.setDelay(40);
                 width = 30;
             }
@@ -206,7 +207,7 @@ public class Player extends MapObject {
             //Idle frames
             if (currentAction != IDLE) {
                 currentAction = IDLE;
-                animation.setFrame(sprites.get(IDLE));
+                animation.setFrames(sprites.get(IDLE));
                 animation.setDelay(400);
                 width = 30;
             }
