@@ -285,6 +285,35 @@ public class Player extends MapObject {
                 }
             }
         }
-        return nextPosition;
+
+        //cannot attack while moving expect in air
+        if((currentAction == SCRATCHING || currentAction == FIREBALL) && !(jumping || falling)){
+            //cannot move
+            dx = 0;
+        }
+
+        //jumping
+        if(jumping || !falling){
+            dy = jumpStart;
+            falling = true;
+        }
+
+        //falling
+        if(falling){
+            if(dy > 0 && gliding){
+                //fall at 10% of fall speed
+                dy += fallSpeed*0.1;
+            }
+            else{
+                //fall at regular speed
+                dy += fallSpeed;
+            }
+            if(dy > 0) jumping=false;
+            //jump button is not pressed and we are going up... come down!
+            //the longer the jump button the higer it goes
+            if(dy < 0 && !jumping) dy += stopJumpSpeed;
+
+            if(dy > maxFallSpeed) dy = maxFallSpeed;
+        }
     }
 }
