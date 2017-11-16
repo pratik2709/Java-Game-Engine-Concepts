@@ -28,6 +28,7 @@ public class Level1State extends GameState {
         bg = new Background("/Backgrounds/grassbg1.gif", (int) 0.1);
 
         player = new Player(tileMap);
+        player.setPosition(100,100);
     }
 
     @Override
