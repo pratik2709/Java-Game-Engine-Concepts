@@ -12,6 +12,17 @@ public class Player extends MapObject {
     //GLIDING
     private boolean gliding;
 
+    //player stuff
+    private int health;
+    private int maxHealth;
+    private int fire;
+    private int maxFire;
+    private boolean dead;
+    private boolean flinching;
+    private boolean flinchTimer;
+
+    
+
     //animtaions
     private ArrayList<BufferedImage[]> sprites;
 
@@ -50,6 +61,7 @@ public class Player extends MapObject {
         fireCost = 200;
         fireBallDamage = 5;
         //fireBalls = new ArrayList<FireBall>();
+
 
         scratchDamage = 8;
         scratchRange = 40;
