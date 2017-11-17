@@ -36,6 +36,7 @@ public class Player extends MapObject {
     //animtaions
     private ArrayList<BufferedImage[]> sprites;
 
+    //animation actions
     private final int[] numFrames = {
             2, 8, 1, 2, 4, 2, 5
     };
@@ -149,6 +150,7 @@ public class Player extends MapObject {
 
     public void update() {
         //??
+        //after setting the position of the sprite set the animations
         getNextPosition();
         checkTileMapCollision();
         setPosition(xtemp, ytemp);
@@ -173,14 +175,17 @@ public class Player extends MapObject {
         }
         //dy is direction ?
         //falling animations
+        //dy up means going down
         else if (dy > 0) {
-            if (currentAction != GLIDING) {
-                currentAction = GLIDING;
-                animation.setFrames(sprites.get(GLIDING));
-                //??
-                animation.setDelay(100);
-                //width of the sprite
-                width = 30;
+            if (gliding) {
+                if (currentAction != GLIDING) {
+                    currentAction = GLIDING;
+                    animation.setFrames(sprites.get(GLIDING));
+                    //??
+                    animation.setDelay(100);
+                    //width of the sprite
+                    width = 30;
+                }
             } else if (currentAction != FALLING) {
                 currentAction = FALLING;
                 animation.setFrames(sprites.get(FALLING));
@@ -200,7 +205,6 @@ public class Player extends MapObject {
                 width = 30;
             }
         }
-
         else if (left || right) {
             if (currentAction != WALKING) {
                 currentAction = WALKING;
@@ -208,8 +212,7 @@ public class Player extends MapObject {
                 animation.setDelay(40);
                 width = 30;
             }
-        }
-        else{
+        } else {
             //Idle frames
             if (currentAction != IDLE) {
                 currentAction = IDLE;
@@ -218,42 +221,44 @@ public class Player extends MapObject {
                 width = 30;
             }
         }
+        //moves stuff forward
         animation.update();
 
+        //dint understand at all***
+        //set the direction
         //???
         //dont want player to move when he is attacking
-        if(currentAction != SCRATCHING && currentAction != FIREBALL){
-            if(right) facingRight = true;
-            if(left) facingRight = false;
+        if (currentAction != SCRATCHING && currentAction != FIREBALL) {
+            if (right) facingRight = true;
+            if (left) facingRight = false;
         }
     }
 
-    public void draw(Graphics2D g){
+    public void draw(Graphics2D g) {
         //?? should be called in every map object why ?
         setMapPostion();
 
         //draw player
-        if(flinching){
-            long elapsed = (System.nanoTime() - flinchTimer)/1000000;
+        if (flinching) {
+            long elapsed = (System.nanoTime() - flinchTimer) / 1000000;
             //why ??
             //gives an appearance of blinking every 100 miliseconds
-            if(elapsed/100 %2 == 0){
+            if (elapsed / 100 % 2 == 0) {
                 return;
             }
         }
-        if(facingRight){
+        if (facingRight) {
             g.drawImage(
                     animation.getImage(),
-                    (int)(x + xmap - width/2),
-                    (int) (y + ymap - height/2),
+                    (int) (x + xmap - width / 2),
+                    (int) (y + ymap - height / 2),
                     null);
-        }
-        else{
+        } else {
             //drawing a flipped sprite
             g.drawImage(
                     animation.getImage(),
-                    (int)(x + xmap - width/2 + width),
-                    (int) (y + ymap - height/2),
+                    (int) (x + xmap - width / 2 + width),
+                    (int) (y + ymap - height / 2),
                     -width,
                     height,
                     null);
@@ -264,63 +269,59 @@ public class Player extends MapObject {
         //movement
         //dont go beyond maximum speed
         //dx is the delta distance ?? -- sounds reasonable
-        if(left){
+        if (left) {
             dx -= moveSpeed;
-            if(dx < -maxSpeed){
+            if (dx < -maxSpeed) {
                 dx = -maxSpeed;
             }
-        }
-        else if(right) {
+        } else if (right) {
             dx += moveSpeed;
-            if(dx > maxSpeed){
+            if (dx > maxSpeed) {
                 dx = maxSpeed;
             }
-        }
-        else{
+        } else {
             //?? -- if not left or right
             // left and right above have some meaning?
-            if(dx > 0){
+            if (dx > 0) {
                 dx -= stopSpeed;
-                if(dx < 0){
+                if (dx < 0) {
                     dx = 0;
                 }
-            }
-            else if(dx < 0){
+            } else if (dx < 0) {
                 dx += stopSpeed;
-                if(dx > 0){
+                if (dx > 0) {
                     dx = 0;
                 }
             }
         }
 
         //cannot attack while moving expect in air
-        if((currentAction == SCRATCHING || currentAction == FIREBALL) && !(jumping || falling)){
+        if ((currentAction == SCRATCHING || currentAction == FIREBALL) && !(jumping || falling)) {
             //cannot move
             dx = 0;
         }
 
         //jumping
-        if(jumping || !falling){
+        if (jumping || !falling) {
             dy = jumpStart;
             falling = true;
         }
 
         //falling
-        if(falling){
-            if(dy > 0 && gliding){
+        if (falling) {
+            if (dy > 0 && gliding) {
                 //fall at 10% of fall speed
-                dy += fallSpeed*0.1;
-            }
-            else{
+                dy += fallSpeed * 0.1;
+            } else {
                 //fall at regular speed
                 dy += fallSpeed;
             }
-            if(dy > 0) jumping=false;
+            if (dy > 0) jumping = false;
             //jump button is not pressed and we are going up... come down!
             //the longer the jump button the higer it goes
-            if(dy < 0 && !jumping) dy += stopJumpSpeed;
+            if (dy < 0 && !jumping) dy += stopJumpSpeed;
 
-            if(dy > maxFallSpeed) dy = maxFallSpeed;
+            if (dy > maxFallSpeed) dy = maxFallSpeed;
         }
     }
 }
