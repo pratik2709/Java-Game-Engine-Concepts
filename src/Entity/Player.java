@@ -297,19 +297,21 @@ public class Player extends MapObject {
             }
         }
 
-        //cannot attack while moving expect in air
+        //cannot move while attacking expect in air
         if ((currentAction == SCRATCHING || currentAction == FIREBALL) && !(jumping || falling)) {
             //cannot move
             dx = 0;
         }
 
         //jumping
+        //why not falling is here??
         if (jumping || !falling) {
             dy = jumpStart;
             falling = true;
         }
 
-        //falling
+        //??
+        //falling -- not standing on solid ground
         if (falling) {
             if (dy > 0 && gliding) {
                 //fall at 10% of fall speed
@@ -318,6 +320,7 @@ public class Player extends MapObject {
                 //fall at regular speed
                 dy += fallSpeed;
             }
+            //cant jump while falling !
             if (dy > 0) jumping = false;
             //jump button is not pressed and we are going up... come down!
             //the longer the jump button the higer it goes
