@@ -105,9 +105,9 @@ public abstract class MapObject {
         int topTile = (int) (y - cheight / 2) / tileSize;
         int bottomTile = (int) (y + cheight / 2 - 1) / tileSize;
 
-        if (topTile <= 0 || bottomTile >= tileMap.getNumRows() || leftTile <= 0
-                || rightTile >= tileMap.getNumCols()) {
-            topLeft = topRight = bottomLeft = bottomRight;
+        if (topTile < 0 || bottomTile > tileMap.getNumRows() || leftTile < 0
+                || rightTile > tileMap.getNumCols()) {
+            topLeft = topRight = bottomLeft = bottomRight = true;
             return;
         }
 
@@ -177,7 +177,7 @@ public abstract class MapObject {
                 dx = 0;
                 falling = false;
                 //just right
-                xtemp = (currRow + 1) * tileSize - cwidth / 2;
+                xtemp = (currCol + 1) * tileSize - cwidth / 2;
             } else {
                 xtemp += dx;
             }
