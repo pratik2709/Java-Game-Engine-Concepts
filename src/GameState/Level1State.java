@@ -35,6 +35,7 @@ public class Level1State extends GameState {
     @Override
     public void update() {
         player.update();
+        //??
         tileMap.setPosition(
                 GamePanel.WIDTH/2 - player.getx(),
                 GamePanel.HEIGHT/2 - player.gety()
@@ -45,7 +46,9 @@ public class Level1State extends GameState {
 
     @Override
     public void draw(Graphics2D g) {
+        //draw background
         bg.draw(g);
+        //draw tilemap
         tileMap.draw(g);
         //draw player
         player.draw(g);
