@@ -7,6 +7,7 @@ public class Animation {
     private int currentFrame;
 
     private long startTime;
+    //how long between each frame
     private long delay;
 
     //has looped once?
@@ -32,7 +33,6 @@ public class Animation {
     }
 
     public void update(){
-        //what is delay??
         if(delay == -1) return;
 
         long elapsed = (System.nanoTime() - startTime)/ 1000000;
