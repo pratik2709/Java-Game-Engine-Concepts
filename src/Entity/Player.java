@@ -229,6 +229,7 @@ public class Player extends MapObject {
         //???
         //dont want player to move when he is attacking
         if (currentAction != SCRATCHING && currentAction != FIREBALL) {
+            //what is right and left and where it is first set??
             if (right) facingRight = true;
             if (left) facingRight = false;
         }
@@ -243,6 +244,7 @@ public class Player extends MapObject {
             long elapsed = (System.nanoTime() - flinchTimer) / 1000000;
             //why ??
             //gives an appearance of blinking every 100 miliseconds
+            //why divide by 100?
             if (elapsed / 100 % 2 == 0) {
                 return;
             }
