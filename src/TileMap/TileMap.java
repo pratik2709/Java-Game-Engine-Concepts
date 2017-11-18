@@ -12,8 +12,10 @@ import java.io.InputStreamReader;
 import java.util.Arrays;
 
 public class TileMap {
-    private int x;
-    private int y;
+    private double x;
+    private double y;
+
+    private double tween;
 
     //bounds
     private int xmin;
@@ -36,6 +38,7 @@ public class TileMap {
 
 
     //drawing
+    //draw only part of the tilemap (whatever is visible) instead of all the tiles
     private int rowOffset;
     private int colOffset;
     private int numOfRowsToDraw;
@@ -43,9 +46,10 @@ public class TileMap {
 
     public TileMap(int tileSize) {
         this.tileSize = tileSize;
-        numOfRowsToDraw = GamePanel.HEIGHT / tileSize;
-        numOfColsToDraw = GamePanel.WIDTH / tileSize;
-        double tween = 0.07;
+        //tilesize is around 30
+        numOfRowsToDraw = GamePanel.HEIGHT / tileSize + 2;
+        numOfColsToDraw = GamePanel.WIDTH / tileSize + 2;
+        tween = 0.07;
     }
 
     //each tile is an image which is being loaded in a 2D array
@@ -90,6 +94,7 @@ public class TileMap {
             BufferedReader br = new BufferedReader(
                     new InputStreamReader(in)
             );
+            //1st 2 lines contain col and row info
             numCols = Integer.parseInt(br.readLine());
             numRows = Integer.parseInt(br.readLine());
             map = new int[numRows][numCols];
@@ -150,8 +155,9 @@ public class TileMap {
     }
 
     public void setPosition(double x, double y){
-        this.x += x;
-        this.y += y;
+        //??
+        this.x += (x - this.x) * tween;
+        this.y += (y - this.y) * tween;
 
         fixbounds();
 
@@ -173,6 +179,7 @@ public class TileMap {
     public void draw(Graphics2D g){
         //?
         for(int row = rowOffset; row < rowOffset + numOfRowsToDraw; row++){
+            if(row >= numRows) break;
             for(int col = colOffset; col < colOffset + numOfColsToDraw; col++){
 
                 if(col >= numCols) break;

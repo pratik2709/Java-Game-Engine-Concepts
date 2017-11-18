@@ -231,6 +231,8 @@ public abstract class MapObject {
     public void setMapPostion() {
         // local position
         //as player moves right , map will move left and xmap goes down
+        //if player is at 2000,1000
+        //how far the tilemap has moved to offset the player back on the screen
         xmap = tileMap.getx();
         ymap = tileMap.gety();
     }
@@ -256,6 +258,7 @@ public abstract class MapObject {
     }
 
     public boolean notOnScreen() {
+        //where the object is
         return x + xmap + width < 0 || x + xmap - width > GamePanel.WIDTH ||
                 y + ymap + height < 0 || y + ymap - height > GamePanel.HEIGHT;
     }
