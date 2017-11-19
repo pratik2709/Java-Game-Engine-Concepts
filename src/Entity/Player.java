@@ -25,7 +25,7 @@ public class Player extends MapObject {
     private boolean firing;
     private int fireCost;
     private int fireBallDamage;
-    //private ArrayList<FireBall> fireballs;
+    private ArrayList<FireBall> fireballs;
 
     //scratch
     private boolean scratching;
