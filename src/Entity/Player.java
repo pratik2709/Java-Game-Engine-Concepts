@@ -25,7 +25,7 @@ public class Player extends MapObject {
     private boolean firing;
     private int fireCost;
     private int fireBallDamage;
-    private ArrayList<FireBall> fireballs;
+    private ArrayList<FireBall> fireBalls;
 
     //scratch
     private boolean scratching;
@@ -71,7 +71,7 @@ public class Player extends MapObject {
         fire = maxFire = 2500;
         fireCost = 200;
         fireBallDamage = 5;
-        //fireBalls = new ArrayList<FireBall>();
+        fireBalls = new ArrayList<FireBall>();
 
 
         scratchDamage = 8;
@@ -163,6 +163,22 @@ public class Player extends MapObject {
             if(animation.hasPlayedOnce()) firing = false;
         }
 
+        //fireball attack
+        //consistently generated
+        fire += 1;
+        //cap the value
+        if(fire > maxFire) fire = maxFire;
+        if(firing && currentAction != FIREBALL){
+            //??
+            if(fire > fireCost){
+                fire -= fireCost;
+                FireBall fb = new FireBall(tileMap, facingRight);
+                //same as the player location
+                fb.setPosition(x, y);
+                fireBalls.add(fb);
+            }
+        }
+
         //set animation
         if (scratching) {
             if (currentAction != SCRATCHING) {
@@ -246,6 +262,11 @@ public class Player extends MapObject {
     public void draw(Graphics2D g) {
         //?? should be called in every map object why ?
         setMapPostion();
+
+        //draw fireballs
+        for(int i = 0; i < fireBalls.size(); i++){
+            fireBalls.get(i).draw(g);
+        }
 
         //draw player
         if (flinching) {

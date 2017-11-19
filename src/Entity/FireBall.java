@@ -87,7 +87,6 @@ public class FireBall extends MapObject{
 
     public void draw(Graphics2D g){
         setMapPostion();
-
         if (facingRight) {
             g.drawImage(
                     animation.getImage(),
