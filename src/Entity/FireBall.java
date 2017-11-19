@@ -2,6 +2,7 @@ package Entity;
 
 import TileMap.TileMap;
 
+import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 
 public class FireBall extends MapObject{
@@ -26,6 +27,31 @@ public class FireBall extends MapObject{
 
         //load sprites
         try{
+            BufferedImage spriteSheet = ImageIO.read(
+                    getClass().getResourceAsStream("/Sprites/Player/fireball.gif")
+            );
+            sprites = new BufferedImage[4];
+            for(int i = 0; i < sprites.length; i++){
+                sprites[i] = spriteSheet.getSubimage(
+                        i*width,
+                        0,
+                        width,
+                        height
+                        );
+            }
+            hitSprites = new BufferedImage[3];
+            for(int i = 0; i < hitSprites.length; i++){
+                hitSprites[i] = spriteSheet.getSubimage(
+                        i*width,
+                        height,
+                        width,
+                        height
+                        );
+            }
+            animation = new Animation();
+            animation.setFrames(sprites);
+            animation.setDelay(70);
+
 
         } catch (Exception e){
             e.printStackTrace();
