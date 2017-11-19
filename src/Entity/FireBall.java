@@ -3,6 +3,7 @@ package Entity;
 import TileMap.TileMap;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class FireBall extends MapObject{
@@ -57,4 +58,53 @@ public class FireBall extends MapObject{
             e.printStackTrace();
         }
     }
+
+    //has the fireball has hit something
+    public void setHit(){
+        if(hit) return;
+        hit = true;
+        animation.setFrames(hitSprites);
+        animation.setDelay(70);
+        //stop moving
+        dx = 0;
+    }
+
+    //should you take it out of the game ?
+    public boolean shouldRemove(){
+        return remove;
+    }
+
+    public void update(){
+        checkTileMapCollision();
+        setPosition(xtemp, ytemp);
+        animation.update();
+
+        //remove from the screen
+        if(hit && animation.hasPlayedOnce()){
+            remove = true;
+        }
+    }
+
+    public void draw(Graphics2D g){
+        setMapPostion();
+
+        if (facingRight) {
+            g.drawImage(
+                    animation.getImage(),
+                    (int) (x + xmap - width / 2),
+                    (int) (y + ymap - height / 2),
+                    null);
+        } else {
+            //drawing a flipped sprite
+            g.drawImage(
+                    animation.getImage(),
+                    (int) (x + xmap - width / 2 + width),
+                    (int) (y + ymap - height / 2),
+                    -width,
+                    height,
+                    null);
+        }
+    }
+
+
 }
