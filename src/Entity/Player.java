@@ -305,7 +305,10 @@ public class Player extends MapObject {
 
         //jumping
         //why not falling is here??
-        if (jumping || !falling) {
+//        System.out.println("jumping value:" + jumping);
+        //modification
+        if (jumping && !falling) {
+//            System.out.println("inside jumping");
             dy = jumpStart;
             falling = true;
         }
