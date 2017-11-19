@@ -100,7 +100,7 @@ public class Player extends MapObject {
                         bi[j] = spriteSheet.getSubimage(
                                 j * width * 2,
                                 i * height,
-                                width,
+                                width * 2,
                                 height
                         );
                     }
@@ -154,6 +154,14 @@ public class Player extends MapObject {
         getNextPosition();
         checkTileMapCollision();
         setPosition(xtemp, ytemp);
+
+        //check attack has stopped
+        if(currentAction == SCRATCHING){
+            if(animation.hasPlayedOnce()) scratching = false;
+        }
+        if(currentAction == FIREBALL){
+            if(animation.hasPlayedOnce()) firing = false;
+        }
 
         //set animation
         if (scratching) {
