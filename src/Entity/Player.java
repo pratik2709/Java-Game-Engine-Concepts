@@ -179,6 +179,16 @@ public class Player extends MapObject {
             }
         }
 
+        //update fireballs
+        for(int i = 0; i < fireBalls.size(); i++){
+            fireBalls.get(i).update();
+            if(fireBalls.get(i).shouldRemove()){
+                fireBalls.remove(i);
+                //https://stackoverflow.com/questions/18688339/arraylist-remove-element-shifting-list-down
+                i--;
+            }
+        }
+
         //set animation
         if (scratching) {
             if (currentAction != SCRATCHING) {
