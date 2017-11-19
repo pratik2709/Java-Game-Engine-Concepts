@@ -79,6 +79,10 @@ public class FireBall extends MapObject{
         setPosition(xtemp, ytemp);
         animation.update();
 
+        if(dx == 0 && !hit){
+            setHit();
+        }
+
         //remove from the screen
         if(hit && animation.hasPlayedOnce()){
             remove = true;
