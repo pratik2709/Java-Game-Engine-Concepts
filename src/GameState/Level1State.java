@@ -1,6 +1,7 @@
 package GameState;
 
 import Entity.*;
+import Entity.Enemies.Slugger;
 import Main.GamePanel;
 import TileMap.*;
 
@@ -15,6 +16,7 @@ public class Level1State extends GameState {
 
     private Player player;
     private ArrayList<Enemy> enemies;
+    private HUD hud;
 
     public Level1State(GameStateManager gsm) {
         this.gsm = gsm;
@@ -33,6 +35,14 @@ public class Level1State extends GameState {
         player = new Player(tileMap);
         player.setPosition(100,100);
 
+        //enemies
+        enemies = new ArrayList<Enemy>();
+        Slugger s = new Slugger(tileMap);
+        s.setPosition(100,100);
+        enemies.add(s);
+
+        hud = new HUD(player);
+
     }
 
     @Override
@@ -48,6 +58,11 @@ public class Level1State extends GameState {
         //set background
         bg.setPosition((int)tileMap.getx(), (int)tileMap.gety());
 
+        //update enemies
+        for(int i = 0; i < enemies.size(); i++){
+            enemies.get(i).update();
+        }
+
     }
 
     @Override
@@ -58,6 +73,14 @@ public class Level1State extends GameState {
         tileMap.draw(g);
         //draw player
         player.draw(g);
+
+        //enemies
+        for(int i = 0; i < enemies.size(); i++){
+            enemies.get(i).draw(g);
+        }
+
+        //draw hud
+        hud.draw(g);
     }
 
     @Override
