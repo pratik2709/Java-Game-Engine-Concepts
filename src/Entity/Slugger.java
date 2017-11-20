@@ -50,7 +50,9 @@ public class Slugger extends Enemy {
         animation.setFrames(sprites);
         animation.setDelay(300);
 
+        //since there is no button press
         right = true;
+        facingRight = true;
     }
 
     private void getNextPosition(){
@@ -87,10 +89,12 @@ public class Slugger extends Enemy {
         if(right && dx == 0){
             right = false;
             left = true;
+            facingRight = false;
         }
         else if(left && dx == 0){
             left = false;
             right = true;
+            facingRight = true;
         }
 
     }
