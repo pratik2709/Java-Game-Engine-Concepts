@@ -288,22 +288,7 @@ public class Player extends MapObject {
                 return;
             }
         }
-        if (facingRight) {
-            g.drawImage(
-                    animation.getImage(),
-                    (int) (x + xmap - width / 2),
-                    (int) (y + ymap - height / 2),
-                    null);
-        } else {
-            //drawing a flipped sprite
-            g.drawImage(
-                    animation.getImage(),
-                    (int) (x + xmap - width / 2 + width),
-                    (int) (y + ymap - height / 2),
-                    -width,
-                    height,
-                    null);
-        }
+        super.draw(g);
     }
 
     private void getNextPosition() {
