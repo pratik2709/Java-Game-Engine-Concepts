@@ -6,6 +6,7 @@ import TileMap.*;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 public class Level1State extends GameState {
 
@@ -13,6 +14,7 @@ public class Level1State extends GameState {
     private Background bg;
 
     private Player player;
+    private ArrayList<Enemy> enemies;
 
     public Level1State(GameStateManager gsm) {
         this.gsm = gsm;
@@ -25,11 +27,12 @@ public class Level1State extends GameState {
         tileMap.loadTiles("/Tilesets/grasstileset.gif");
         tileMap.loadMap("/Maps/level1-1.map");
         tileMap.setPosition(0,0);
-
+//        tileMap.setTween(0.07);
         bg = new Background("/Backgrounds/grassbg1.gif", (int) 0.1);
 
         player = new Player(tileMap);
         player.setPosition(100,100);
+
     }
 
     @Override
@@ -41,6 +44,9 @@ public class Level1State extends GameState {
                 GamePanel.HEIGHT/2 - player.gety()
 
         );
+
+        //set background
+        bg.setPosition((int)tileMap.getx(), (int)tileMap.gety());
 
     }
 
