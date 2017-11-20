@@ -169,7 +169,7 @@ public class Player extends MapObject {
         //cap the value
         if(fire > maxFire) fire = maxFire;
         if(firing && currentAction != FIREBALL){
-            //??
+            //?? -- will have 2500/200=12 fireballs in the array ??
             if(fire > fireCost){
                 fire -= fireCost;
                 FireBall fb = new FireBall(tileMap, facingRight);
@@ -179,7 +179,7 @@ public class Player extends MapObject {
             }
         }
 
-        //update fireballs
+        //update fireballs until all fireballs are removed
         for(int i = 0; i < fireBalls.size(); i++){
             fireBalls.get(i).update();
             if(fireBalls.get(i).shouldRemove()){
