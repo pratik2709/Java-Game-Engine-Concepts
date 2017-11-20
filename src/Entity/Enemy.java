@@ -2,7 +2,7 @@ package Entity;
 
 import TileMap.TileMap;
 
-public abstract class Enemy extends MapObject {
+public class Enemy extends MapObject {
 
     protected int health;
     protected int maxHealth;
