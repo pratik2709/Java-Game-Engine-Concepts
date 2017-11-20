@@ -5,6 +5,7 @@ import Entity.Enemy;
 import TileMap.TileMap;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Slugger extends Enemy {
@@ -50,5 +51,37 @@ public class Slugger extends Enemy {
         animation.setDelay(300);
 
         right = true;
+    }
+
+    private void getNextPosition(){
+        if (left) {
+            dx -= moveSpeed;
+            if (dx < -maxSpeed) {
+                dx = -maxSpeed;
+            }
+        } else if (right) {
+            dx += moveSpeed;
+            if (dx > maxSpeed) {
+                dx = maxSpeed;
+            }
+        }
+        if(falling){
+
+        }
+    }
+
+    public void update(){
+
+        //update position
+        getNextPosition();
+        checkTileMapCollision();
+        setPosition(xtemp, ytemp);
+    }
+
+    public void draw(Graphics2D g){
+        //not necessary
+        if(notOnScreen()) return;
+        setMapPostion();
+        super.draw(g);
     }
 }
