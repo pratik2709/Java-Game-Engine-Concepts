@@ -16,6 +16,8 @@ public class Level1State extends GameState {
 
     private Player player;
     private ArrayList<Enemy> enemies;
+    private ArrayList<Explosion> explosions;
+
     private HUD hud;
 
     public Level1State(GameStateManager gsm) {
@@ -41,6 +43,8 @@ public class Level1State extends GameState {
         s.setPosition(100,100);
         enemies.add(s);
 
+        explosions = new ArrayList<Explosion>();
+
         hud = new HUD(player);
 
     }
@@ -63,11 +67,19 @@ public class Level1State extends GameState {
 
         //update enemies
         for(int i = 0; i < enemies.size(); i++){
-            enemies.get(i).update();
-            if(enemies.get(i).isDead()) {
+            Enemy e = enemies.get(i);
+            e.update();
+            if(e.isDead()) {
                 enemies.remove(i);
                 i--;
+                explosions.add(
+                        new Explosion(e.getx(), e.gety())
+                );
             }
+        }
+        //update explosions
+        for(int i = 0; i < explosions.size(); i++){
+            explosions.get(i).update();
         }
 
     }
@@ -84,6 +96,11 @@ public class Level1State extends GameState {
         //enemies
         for(int i = 0; i < enemies.size(); i++){
             enemies.get(i).draw(g);
+        }
+
+        //draw explosions
+        for(int i = 0; i < explosions.size(); i++){
+            explosions.get(i).draw(g);
         }
 
         //draw hud
