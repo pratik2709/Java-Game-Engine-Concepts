@@ -197,6 +197,7 @@ public class Player extends MapObject {
         if(flinching){
             return;
         }
+        health -= damage;
         if(health < 0) health = 0;
         if(health == 0) dead = true;
         flinching = true;
