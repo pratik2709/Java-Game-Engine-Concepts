@@ -181,11 +181,26 @@ public class Player extends MapObject {
                     break;
                 }
             }
+
+            //check enemy collision
+            if(intersects(e)){
+                hit(e.getDamage());
+            }
         }
 
 
         //check for fireballs
 
+    }
+
+    public void hit(int damage) {
+        if(flinching){
+            return;
+        }
+        if(health < 0) health = 0;
+        if(health == 0) dead = true;
+        flinching = true;
+        flinchTimer = System.nanoTime();
     }
 
     public void update() {
