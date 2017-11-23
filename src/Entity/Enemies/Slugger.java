@@ -101,7 +101,7 @@ public class Slugger extends Enemy {
 
     public void draw(Graphics2D g){
         //not necessary
-        if(notOnScreen()) return;
+//        if(notOnScreen()) return;
         setMapPostion();
         super.draw(g);
     }

@@ -44,9 +44,6 @@ public class Background {
     public void update() {
         x += this.dx;
         y += this.dy;
-//        System.out.println(this.x);
-//        System.out.println(this.dx);
-//        System.out.println(this.dx + this.x);
     }
 
     public void draw(Graphics2D g) {
