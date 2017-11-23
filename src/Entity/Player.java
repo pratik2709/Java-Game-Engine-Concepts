@@ -244,6 +244,14 @@ public class Player extends MapObject {
             }
         }
 
+        //check done flinching
+        if(flinching){
+            long elapsed = (System.nanoTime() - flinchTimer)/1000000;
+            if(elapsed > 1000){
+                flinching = false;
+            }
+        }
+
         //set animation
         if (scratching) {
             if (currentAction != SCRATCHING) {
