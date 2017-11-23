@@ -158,7 +158,7 @@ public class Player extends MapObject {
                 if (facingRight) {
                     if(e.getx() > x
                             && e.getx() < x + scratchRange
-                            && e.gety() < y - height/2 &&
+                            && e.gety() > y - height/2 &&
                             e.gety() < y + height/2){
                         e.hit(scratchDamage);
                     }
