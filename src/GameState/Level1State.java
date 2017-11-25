@@ -1,5 +1,6 @@
 package GameState;
 
+import Audio.AudioPlayer;
 import Entity.*;
 import Entity.Enemies.Slugger;
 import Main.GamePanel;
@@ -19,6 +20,8 @@ public class Level1State extends GameState {
     private ArrayList<Explosion> explosions;
 
     private HUD hud;
+
+    private AudioPlayer bgMusic;
 
     public Level1State(GameStateManager gsm) {
         this.gsm = gsm;
@@ -42,7 +45,8 @@ public class Level1State extends GameState {
         explosions = new ArrayList<Explosion>();
 
         hud = new HUD(player);
-
+        bgMusic = new AudioPlayer("/Music/level1.mp3");
+        bgMusic.play();
     }
 
     private void populateEnemies() {
